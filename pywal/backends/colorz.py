@@ -1,6 +1,7 @@
 """
 Generate a colorscheme using Colorz.
 """
+
 import logging
 import sys
 
@@ -25,8 +26,7 @@ def gen_colors(img):
 
 def adjust(cols, light):
     """Create palette."""
-    raw_colors = [cols[0], *cols, "#FFFFFF",
-                  "#000000", *cols, "#FFFFFF"]
+    raw_colors = [cols[0], *cols, "#FFFFFF", "#000000", *cols, "#FFFFFF"]
 
     return colors.generic_adjust(raw_colors, light)
 

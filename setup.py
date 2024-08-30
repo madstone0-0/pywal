@@ -1,4 +1,5 @@
 """wal - setup.py"""
+
 import sys
 import setuptools
 
@@ -8,7 +9,7 @@ except ImportError:
     print("error: pywal requires Python 3.5 or greater.")
     sys.exit(1)
 
-LONG_DESC = open('README.md').read()
+LONG_DESC = open("README.md").read()
 VERSION = pywal.__version__
 DOWNLOAD = "https://github.com/dylanaraps/pywal/archive/%s.tar.gz" % VERSION
 
@@ -36,4 +37,5 @@ setuptools.setup(
     python_requires=">=3.5",
     test_suite="tests",
     include_package_data=True,
-    zip_safe=False)
+    zip_safe=False,
+)

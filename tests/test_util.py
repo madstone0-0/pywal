@@ -1,4 +1,5 @@
 """Test util functions."""
+
 import unittest
 import os
 
@@ -92,6 +93,7 @@ class TestUtil(unittest.TestCase):
         """> Generate checksum from image file"""
         result = util.gen_color_checksum("tests/test_files/test.jpg")
         self.assertEqual(result, "8e21a704294404a9084375f1761aaa51")
+
 
 if __name__ == "__main__":
     unittest.main()

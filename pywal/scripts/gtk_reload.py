@@ -7,6 +7,7 @@ which isn't available in Python 3.
 
 Original source: https://crunchbang.org/forums/viewtopic.php?id=39646
 """
+
 try:
     import gtk
 except ImportError:

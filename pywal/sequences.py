@@ -1,6 +1,7 @@
 """
 Send sequences to all open terminals.
 """
+
 import glob
 import logging
 import os
@@ -30,9 +31,11 @@ def set_color(index, color):
 
 def set_iterm_tab_color(color):
     """Set iTerm2 tab/window color"""
-    return ("\033]6;1;bg;red;brightness;%s\a"
-            "\033]6;1;bg;green;brightness;%s\a"
-            "\033]6;1;bg;blue;brightness;%s\a") % (*util.hex_to_rgb(color),)
+    return (
+        "\033]6;1;bg;red;brightness;%s\a"
+        "\033]6;1;bg;green;brightness;%s\a"
+        "\033]6;1;bg;blue;brightness;%s\a"
+    ) % (*util.hex_to_rgb(color),)
 
 
 def create_sequences(colors, vte_fix=False):
@@ -40,29 +43,30 @@ def create_sequences(colors, vte_fix=False):
     alpha = colors["alpha"]
 
     # Colors 0-15.
-    sequences = [set_color(index, colors["colors"]["color%s" % index])
-                 for index in range(16)]
+    sequences = [
+        set_color(index, colors["colors"]["color%s" % index]) for index in range(16)
+    ]
 
     # Special colors.
     # Source: https://goo.gl/KcoQgP
     # 10 = foreground, 11 = background, 12 = cursor foreground
     # 13 = mouse foreground, 708 = background border color.
-    sequences.extend([
-        set_special(10, colors["special"]["foreground"], "g"),
-        set_special(11, colors["special"]["background"], "h", alpha),
-        set_special(12, colors["special"]["cursor"], "l"),
-        set_special(13, colors["special"]["foreground"], "j"),
-        set_special(17, colors["special"]["foreground"], "k"),
-        set_special(19, colors["special"]["background"], "m"),
-        set_color(232, colors["special"]["background"]),
-        set_color(256, colors["special"]["foreground"]),
-        set_color(257, colors["special"]["background"]),
-    ])
+    sequences.extend(
+        [
+            set_special(10, colors["special"]["foreground"], "g"),
+            set_special(11, colors["special"]["background"], "h", alpha),
+            set_special(12, colors["special"]["cursor"], "l"),
+            set_special(13, colors["special"]["foreground"], "j"),
+            set_special(17, colors["special"]["foreground"], "k"),
+            set_special(19, colors["special"]["background"], "m"),
+            set_color(232, colors["special"]["background"]),
+            set_color(256, colors["special"]["foreground"]),
+            set_color(257, colors["special"]["background"]),
+        ]
+    )
 
     if not vte_fix:
-        sequences.extend(
-            set_special(708, colors["special"]["background"], "", alpha)
-        )
+        sequences.extend(set_special(708, colors["special"]["background"], "", alpha))
 
     if OS == "Darwin":
         sequences += set_iterm_tab_color(colors["special"]["background"])
